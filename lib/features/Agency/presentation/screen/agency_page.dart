@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:getcare360/features/Agency/presentation/screen/add_organization_page.dart';
-import 'package:getcare360/features/Agency/presentation/screen/view_all_organization.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Organization/add_organization_page.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Organization/organization_archive.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Organization/organization_rosterpage.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Organization/organization_timesheet.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Organization/view_all_organization.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/act.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/add_new_stafftype_page.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/add_saff_group_page.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/all_staff_grouppage.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/all_staff_type_page.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/nsw.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/staff_archive.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/staff_availablitity_page.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/vic.dart';
 import 'package:getcare360/features/Agency/presentation/widget/agency_menu_list.dart';
 import 'package:getcare360/features/Dashboard/presentation/screen/home_page.dart';
 import 'package:getcare360/core/widget/dashboard_card.dart';
@@ -38,6 +50,59 @@ class _AgencyPageState extends State<AgencyPage> {
 
     if (key == "org_add") {
       NavigatorHelper.push(context, const AddOrganizationPage());
+      return;
+    }
+
+    if (key == "org_archive") {
+      NavigatorHelper.push(context, const OrganizationArchivePage());
+      return;
+    }
+    if (key == "roster") {
+      NavigatorHelper.push(context, const OrganizationRosterPage());
+      return;
+    }
+    if (key == "timesheet") {
+      NavigatorHelper.push(context, const OrganizationTimesheetPage());
+      return;
+    }
+    if (key == "staff_vic") {
+      NavigatorHelper.push(context, const StaffVictoriaPage());
+      return;
+    }
+    if (key == "staff_nsw") {
+      NavigatorHelper.push(context, const StaffNSW());
+      return;
+    }
+    if (key == "staff_act") {
+      NavigatorHelper.push(context, const StaffACT());
+      return;
+    }
+    if (key == "staff_archive") {
+      NavigatorHelper.push(context, const StaffArchivePage());
+      return;
+    }
+    if (key == "staff_availability") {
+      NavigatorHelper.push(context, const StaffAvailabilityPage());
+      return;
+    }
+
+    if (key == "staff_type_all") {
+      NavigatorHelper.push(context, const AllStaffTypePage());
+      return;
+    }
+
+    if (key == "staff_type_add") {
+      NavigatorHelper.push(context, const AddNewStaffTypePage());
+      return;
+    }
+
+    if (key == "staff_group_all") {
+      NavigatorHelper.push(context, const AllStaffGroupPage());
+      return;
+    }
+
+    if (key == "staff_group_add") {
+      NavigatorHelper.push(context, const AddNewStaffGroupPage());
       return;
     }
 

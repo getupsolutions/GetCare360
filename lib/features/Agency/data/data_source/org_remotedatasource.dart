@@ -1,4 +1,4 @@
-import 'package:getcare360/features/Agency/presentation/widget/Organization/moc_data.dart';
+import 'package:getcare360/features/Agency/presentation/widget/Organization/view_org_widget.dart';
 
 abstract class OrgRemoteDataSource {
   Future<List<Map<String, dynamic>>> fetchOrganizations();

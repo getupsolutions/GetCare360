@@ -1,10 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:getcare360/features/Dashboard/presentation/screen/home_page.dart';
-import 'package:getcare360/features/Login/presentation/widget/logo_widget.dart';
-import 'package:getcare360/features/Login/presentation/widget/network_background.dart';
 import 'package:getcare360/core/widget/navigator_helper.dart';
 import 'package:getcare360/core/widget/text_field_box.dart';
+import 'package:getcare360/features/Login/presentation/widget/logo_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -34,9 +33,11 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          const Positioned.fill(child: NetworkBackground()),
+          // ✅ isolate background paints from UI rebuilds
+          const Positioned.fill(
+            child: RepaintBoundary(child: NetworkBackground()),
+          ),
 
-          // Content
           SafeArea(
             child: Center(
               child: LayoutBuilder(
@@ -44,14 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   final w = constraints.maxWidth;
 
                   // Responsive card width
-                  double cardWidth;
-                  if (w >= 1100) {
-                    cardWidth = 520;
-                  } else if (w >= 700) {
-                    cardWidth = 520;
-                  } else {
-                    cardWidth = min(w * 0.92, 520);
-                  }
+                  final cardWidth = w >= 700 ? 520.0 : min(w * 0.92, 520.0);
 
                   final titleSize = shortest < 600 ? 18.0 : 20.0;
                   final subtitleSize = shortest < 600 ? 12.5 : 13.5;
@@ -80,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             "Enter your details to login to your account:",
                             style: TextStyle(
                               fontSize: subtitleSize,
-                              color: Colors.grey.shade600,
+                              color: Colors.grey,
                               height: 1.3,
                             ),
                             textAlign: TextAlign.center,
@@ -93,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             textInputAction: TextInputAction.next,
                           ),
                           const SizedBox(height: 12),
+
                           TextFieldBox(
                             hint: "Enter Password",
                             controller: _passwordCtrl,
@@ -107,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ? Icons.visibility_off
                                     : Icons.visibility,
                                 size: 20,
-                                color: Colors.grey.shade600,
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -119,12 +114,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 44,
                             child: ElevatedButton(
                               onPressed: () {
-                                NavigatorHelper.push(context, HomePage());
+                                NavigatorHelper.push(context, const HomePage());
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(
-                                  0xFF8E24AA,
-                                ), // purple
+                                backgroundColor: const Color(0xFF8E24AA),
                                 foregroundColor: Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
@@ -137,7 +130,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-
                           const SizedBox(height: 8),
                         ],
                       ),

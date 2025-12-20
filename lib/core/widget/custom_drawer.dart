@@ -233,7 +233,6 @@ class _NavNodeState extends State<_NavNode> {
   @override
   void initState() {
     super.initState();
-    // auto expand if selectedKey is inside this group
     _isExpanded = _containsKey(widget.item, widget.selectedKey);
   }
 
@@ -241,13 +240,15 @@ class _NavNodeState extends State<_NavNode> {
   void didUpdateWidget(covariant _NavNode oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // If selection moved into/out of this section, update expansion state
     if (oldWidget.selectedKey != widget.selectedKey) {
       final shouldExpand = _containsKey(widget.item, widget.selectedKey);
 
-      // Only auto-open when selection is inside; don't force-close otherwise
+      // Auto-open if selection moved inside this group
       if (shouldExpand && !_isExpanded) {
-        setState(() => _isExpanded = true);
+        // ✅ defer state change
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) setState(() => _isExpanded = true);
+        });
       }
     }
   }
@@ -315,14 +316,20 @@ class _NavNodeState extends State<_NavNode> {
             borderRadius: BorderRadius.circular(12),
           ),
           child: ExpansionTile(
-            key: PageStorageKey(item.routeKey), // keeps state while scrolling
+            key: PageStorageKey(item.routeKey),
             initiallyExpanded: _isExpanded,
-            onExpansionChanged: (v) => setState(() => _isExpanded = v),
+
+            // ✅ IMPORTANT: defer the update to avoid "setState during build"
+            onExpansionChanged: (v) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (!mounted) return;
+                setState(() => _isExpanded = v);
+              });
+            },
 
             tilePadding: indent.add(const EdgeInsets.symmetric(horizontal: 10)),
             childrenPadding: const EdgeInsets.only(bottom: 6),
 
-            // ✅ Custom arrow: right when collapsed, down when expanded
             trailing: Icon(
               _isExpanded ? Icons.keyboard_arrow_down : Icons.chevron_right,
               color: style.iconColor,
@@ -345,6 +352,7 @@ class _NavNodeState extends State<_NavNode> {
                 ),
               ],
             ),
+
             children: item.children
                 .map(
                   (c) => _NavNode(

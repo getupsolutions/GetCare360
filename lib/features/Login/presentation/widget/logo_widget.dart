@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:getcare360/features/Login/presentation/widget/network_background.dart';
 
-/// Logo similar to "getupai" (text-based so it works everywhere)
 class Logo extends StatelessWidget {
   final double titleScale;
-  const Logo({required this.titleScale});
+  const Logo({super.key, required this.titleScale});
 
   @override
   Widget build(BuildContext context) {
     final base = 46.0 * titleScale;
+    final fontFamily = Theme.of(context).textTheme.bodyMedium?.fontFamily;
+
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -15,7 +17,7 @@ class Logo extends StatelessWidget {
           fontSize: base,
           fontWeight: FontWeight.w800,
           letterSpacing: -1,
-          fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
+          fontFamily: fontFamily,
         ),
         children: const [
           TextSpan(
@@ -32,6 +34,19 @@ class Logo extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// ✅ Optimized network background
+class NetworkBackground extends StatelessWidget {
+  const NetworkBackground({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: NetworkPainter.optimized(),
+      child: const SizedBox.expand(),
     );
   }
 }

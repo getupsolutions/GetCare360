@@ -8,8 +8,7 @@ import 'package:getcare360/features/Agency/domain/usecase/get_organization_useca
 import 'package:getcare360/features/Agency/presentation/bloc/organization/org_bloc.dart';
 import 'package:getcare360/features/Agency/presentation/bloc/organization/org_event.dart';
 import 'package:getcare360/features/Agency/presentation/bloc/organization/org_state.dart';
-import 'package:getcare360/features/Agency/presentation/widget/Organization/org_filterbar.dart';
-import 'package:getcare360/features/Agency/presentation/widget/Organization/org_table.dart';
+import 'package:getcare360/features/Agency/presentation/widget/Organization/view_org_widget.dart';
 
 class ViewAllOrganizationPage extends StatelessWidget {
   const ViewAllOrganizationPage({super.key});

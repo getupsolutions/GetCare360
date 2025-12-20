@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:getcare360/core/widget/custom_appbar.dart';
 import 'package:getcare360/features/Agency/presentation/bloc/organization/add_org_bloc.dart';
 import 'package:getcare360/features/Agency/presentation/bloc/organization/add_org_event.dart';
 import 'package:getcare360/features/Agency/presentation/bloc/organization/add_org_state.dart';
@@ -46,6 +47,7 @@ class _AddOrganizationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(title: 'Add New Organization', centerTitle: true),
       backgroundColor: _pageBg,
       body: SafeArea(
         child: LayoutBuilder(
