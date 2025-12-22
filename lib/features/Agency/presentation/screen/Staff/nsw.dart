@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:getcare360/core/widget/custom_appbar.dart';
-import 'package:getcare360/features/Agency/presentation/widget/Staff/vic_widget.dart';
+import 'package:getcare360/features/Ndis/presentation/widget/Staff/vic_widget.dart';
 
 class StaffNSW extends StatefulWidget {
   const StaffNSW({super.key});

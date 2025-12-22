@@ -2,41 +2,111 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:getcare360/core/widget/action_btn.dart';
 import 'package:getcare360/core/widget/custom_appbar.dart';
-import 'package:getcare360/features/Agency/presentation/screen/Staff/add_saff_group_page.dart';
-import 'package:getcare360/features/Ndis/presentation/screen/Staff/add_saff_group_page.dart';
-import 'package:getcare360/features/Ndis/presentation/screen/Staff/all_staff_type_page.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/ndis_add_new_stafftype_page.dart';
 
-class AllStaffGroupPage extends StatefulWidget {
-  const AllStaffGroupPage({super.key});
+class NdisAllStaffTypePage extends StatefulWidget {
+  const NdisAllStaffTypePage({super.key});
 
   @override
-  State<AllStaffGroupPage> createState() => AllStaffGroupPageState();
+  State<NdisAllStaffTypePage> createState() => AllStaffTypePageState();
 }
 
-class AllStaffGroupPageState extends State<AllStaffGroupPage> {
+class AllStaffTypePageState extends State<NdisAllStaffTypePage> {
   static const Color pageBg = Color(0xFFF3F4F8);
+  static const Color brandPurple = Color(0xFF8E24AA);
+  static const Color sidePurple = Color(0xFF9C27B0);
 
   final TextEditingController searchCtrl = TextEditingController();
   Timer? debounce;
 
-  final List<StaffGroupItem> allItems = const [
-    StaffGroupItem(groupName: "Chamberlain Gardens AINs"),
-    StaffGroupItem(groupName: "Chamberlain Gardens RNs"),
-    StaffGroupItem(groupName: "Kitchen Hand -Chamberlain"),
-    StaffGroupItem(groupName: "Chamberlain Gardens ENs"),
-    StaffGroupItem(groupName: "DSW Triniti"),
-    StaffGroupItem(groupName: "KELLYVILLE-Gino"),
-    StaffGroupItem(groupName: "Casula- Julio"),
-    StaffGroupItem(groupName: "Campbelltown-Shivam"),
-    StaffGroupItem(groupName: "Leumeah-Mattew"),
-    StaffGroupItem(groupName: "Edmondson-Evelyn"),
-    StaffGroupItem(groupName: "Oran Park-Shane"),
-    StaffGroupItem(groupName: "Bradbury-Kira"),
-    StaffGroupItem(groupName: "LIVERPOOL - NEZ"),
-    StaffGroupItem(groupName: "Macquarie-Fayyad"),
+  List<StaffTypeItem> allItems = const [
+    StaffTypeItem(
+      designation: "Disability Support Worker",
+      normalHour: "Casual",
+      pay: "36.50",
+      organization: "Yes",
+    ),
+    StaffTypeItem(
+      designation: "Registered Nurses - NDIS",
+      normalHour: "15",
+      pay: "63.50",
+      organization: "Yes",
+    ),
+    StaffTypeItem(
+      designation: "Physiotherapy",
+      normalHour: "casual",
+      pay: "63.50",
+      organization: "No",
+    ),
+    StaffTypeItem(
+      designation: "Registered Nurse Agency",
+      normalHour: "Casual",
+      pay: "40.00",
+      organization: "No",
+    ),
+    StaffTypeItem(
+      designation: "Assistant in Nursing",
+      normalHour: "Casual",
+      pay: "0.00",
+      organization: "No",
+    ),
+    StaffTypeItem(
+      designation: "Enrolled Nurse",
+      normalHour: "Casual",
+      pay: "0.00",
+      organization: "No",
+    ),
+    StaffTypeItem(
+      designation: "Book Keeper",
+      normalHour: "20 Weekly",
+      pay: "0.00",
+      organization: "No",
+    ),
+    StaffTypeItem(
+      designation: "Agency Staff - PCA",
+      normalHour: "Casual",
+      pay: "0.00",
+      organization: "No",
+    ),
+    StaffTypeItem(
+      designation: "Cleaner",
+      normalHour: "casual",
+      pay: "35.00",
+      organization: "No",
+    ),
+    StaffTypeItem(
+      designation: "Kitchen hand",
+      normalHour: "Casual",
+      pay: "36.50",
+      organization: "Yes",
+    ),
+    StaffTypeItem(
+      designation: "Medicator (Cert IV)",
+      normalHour: "Hours",
+      pay: "36.50",
+      organization: "Yes",
+    ),
+    StaffTypeItem(
+      designation: "Support Coordinator",
+      normalHour: "0",
+      pay: "0.00",
+      organization: "Yes",
+    ),
+    StaffTypeItem(
+      designation: "Support Coordinator/Business Development Manager",
+      normalHour: "0",
+      pay: "0.00",
+      organization: "Yes",
+    ),
+    StaffTypeItem(
+      designation: "Business Development Manager",
+      normalHour: "0",
+      pay: "0.00",
+      organization: "No",
+    ),
   ];
 
-  List<StaffGroupItem> filtered = const [];
+  List<StaffTypeItem> filtered = const [];
 
   @override
   void initState() {
@@ -58,7 +128,13 @@ class AllStaffGroupPageState extends State<AllStaffGroupPage> {
         filtered = List.of(allItems);
       } else {
         filtered = allItems
-            .where((e) => e.groupName.toLowerCase().contains(q))
+            .where(
+              (e) =>
+                  e.designation.toLowerCase().contains(q) ||
+                  e.normalHour.toLowerCase().contains(q) ||
+                  e.pay.toLowerCase().contains(q) ||
+                  e.organization.toLowerCase().contains(q),
+            )
             .toList();
       }
     });
@@ -76,38 +152,46 @@ class AllStaffGroupPageState extends State<AllStaffGroupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+    final bool isDesktop = w >= 980;
+
     return Scaffold(
-      appBar: CustomAppBar(title: 'All Staff Group', centerTitle: true),
+      appBar: CustomAppBar(title: 'All Staff Type', centerTitle: true),
       backgroundColor: pageBg,
       body: SafeArea(
-        child: Column(
+        child: Row(
           children: [
             Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-                child: Center(
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 1150),
-                    child: StaffGroupListCard(
-                      searchCtrl: searchCtrl,
-                      onSearchChanged: onSearchChanged,
-                      onFind: applyFilter,
-                      onClearAll: clearAll,
-                      onAddNew: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => const AddNewStaffGroupPage(),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 1150),
+                          child: StaffTypeListCard(
+                            searchCtrl: searchCtrl,
+                            onSearchChanged: onSearchChanged,
+                            onFind: applyFilter,
+                            onClearAll: clearAll,
+                            onAddNew: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const NdisAddNewStaffTypePage(),
+                                ),
+                              );
+                            },
+                            items: filtered,
                           ),
-                        );
-                      },
-                      items: filtered,
-                      onEdit: (item) {},
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  const FooterBar(),
+                ],
               ),
             ),
-            const FooterBar(),
           ],
         ),
       ),
@@ -115,7 +199,7 @@ class AllStaffGroupPageState extends State<AllStaffGroupPage> {
   }
 }
 
-class StaffGroupListCard extends StatelessWidget {
+class StaffTypeListCard extends StatelessWidget {
   static const Color brandPurple = Color(0xFF8E24AA);
 
   final TextEditingController searchCtrl;
@@ -123,10 +207,9 @@ class StaffGroupListCard extends StatelessWidget {
   final VoidCallback onFind;
   final VoidCallback onClearAll;
   final VoidCallback onAddNew;
-  final List<StaffGroupItem> items;
-  final ValueChanged<StaffGroupItem> onEdit;
+  final List<StaffTypeItem> items;
 
-  const StaffGroupListCard({
+  const StaffTypeListCard({
     super.key,
     required this.searchCtrl,
     required this.onSearchChanged,
@@ -134,11 +217,13 @@ class StaffGroupListCard extends StatelessWidget {
     required this.onClearAll,
     required this.onAddNew,
     required this.items,
-    required this.onEdit,
   });
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+    final bool isMobile = w < 720;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -147,7 +232,6 @@ class StaffGroupListCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
-          // ✅ Responsive header (prevents overflow on small screens)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             color: brandPurple,
@@ -156,11 +240,12 @@ class StaffGroupListCard extends StatelessWidget {
                 final bool isNarrow = c.maxWidth < 650;
 
                 if (isNarrow) {
+                  // ✅ MOBILE: Stack + Wrap (no overflow)
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const Text(
-                        "Staff Groups",
+                        "Staff type",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -203,11 +288,12 @@ class StaffGroupListCard extends StatelessWidget {
                   );
                 }
 
+                // ✅ TABLET / DESKTOP: single row like screenshot
                 return Row(
                   children: [
                     const Expanded(
                       child: Text(
-                        "Staff Groups",
+                        "Staff type",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -249,10 +335,15 @@ class StaffGroupListCard extends StatelessWidget {
             ),
           ),
 
+          // table header + rows
           LayoutBuilder(
             builder: (context, c) {
-              final bool isSmall = c.maxWidth < 420;
-              final double actionWidth = isSmall ? 110 : 160;
+              final bool isSmall = c.maxWidth < 520;
+
+              final double normalW = isSmall ? 90 : 140;
+              final double payW = isSmall ? 70 : 110;
+              final double orgW = isSmall ? 90 : 130;
+              final double actionW = isSmall ? 110 : 160;
 
               return Column(
                 children: [
@@ -262,9 +353,27 @@ class StaffGroupListCard extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: [
-                        const Expanded(child: TableHeaderText("GROUP")),
+                        const Expanded(child: TableHeaderText("DESIGNATION")),
                         SizedBox(
-                          width: actionWidth,
+                          width: normalW,
+                          child: const TableHeaderText("NORMAL HOUR"),
+                        ),
+                        SizedBox(
+                          width: payW,
+                          child: const Align(
+                            alignment: Alignment.center,
+                            child: TableHeaderText("PAY"),
+                          ),
+                        ),
+                        SizedBox(
+                          width: orgW,
+                          child: const Align(
+                            alignment: Alignment.center,
+                            child: TableHeaderText("ORGANIZATION"),
+                          ),
+                        ),
+                        SizedBox(
+                          width: actionW,
                           child: const Align(
                             alignment: Alignment.center,
                             child: TableHeaderText("ACTIONS"),
@@ -278,7 +387,7 @@ class StaffGroupListCard extends StatelessWidget {
                   if (items.isEmpty)
                     const Padding(
                       padding: EdgeInsets.all(18),
-                      child: Text("No staff group found."),
+                      child: Text("No staff type found."),
                     )
                   else
                     ListView.separated(
@@ -287,10 +396,13 @@ class StaffGroupListCard extends StatelessWidget {
                       itemCount: items.length,
                       separatorBuilder: (_, __) => const Divider(height: 1),
                       itemBuilder: (context, i) {
-                        return StaffGroupRow(
+                        return StaffTypeRow(
                           item: items[i],
-                          actionWidth: actionWidth,
-                          onEdit: () => onEdit(items[i]),
+                          normalW: normalW,
+                          payW: payW,
+                          orgW: orgW,
+                          actionW: actionW,
+                          onEdit: () {},
                         );
                       },
                     ),
@@ -304,30 +416,46 @@ class StaffGroupListCard extends StatelessWidget {
   }
 }
 
-class StaffGroupRow extends StatelessWidget {
-  final StaffGroupItem item;
+class StaffTypeRow extends StatelessWidget {
+  final StaffTypeItem item;
   final VoidCallback onEdit;
-  final double actionWidth;
 
-  const StaffGroupRow({
+  final double normalW;
+  final double payW;
+  final double orgW;
+  final double actionW;
+
+  const StaffTypeRow({
     super.key,
     required this.item,
     required this.onEdit,
-    required this.actionWidth,
+    required this.normalW,
+    required this.payW,
+    required this.orgW,
+    required this.actionW,
   });
 
   @override
   Widget build(BuildContext context) {
-    final bool isSmall = MediaQuery.of(context).size.width < 420;
+    final bool isSmall = MediaQuery.of(context).size.width < 520;
 
     return Container(
       height: 54,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
-          Expanded(child: TableCellText(item.groupName)),
+          Expanded(child: TableCellText(item.designation)),
+          SizedBox(width: normalW, child: TableCellText(item.normalHour)),
           SizedBox(
-            width: actionWidth,
+            width: payW,
+            child: TableCellText(item.pay, align: TextAlign.center),
+          ),
+          SizedBox(
+            width: orgW,
+            child: TableCellText(item.organization, align: TextAlign.center),
+          ),
+          SizedBox(
+            width: actionW,
             child: Align(
               alignment: Alignment.center,
               child: SizedBox(
@@ -335,12 +463,9 @@ class StaffGroupRow extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: onEdit,
                   icon: const Icon(Icons.edit, size: 14),
-                  label: Text(
-                    isSmall ? "Edit" : "Edit",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 12,
-                    ),
+                  label: const Text(
+                    "Edit",
+                    style: TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF7ED957),
@@ -445,27 +570,4 @@ class SearchField extends StatelessWidget {
       ),
     );
   }
-}
-
-class FooterBar extends StatelessWidget {
-  const FooterBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 44,
-      alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      color: const Color(0xFFEDEFF6),
-      child: const Text(
-        "2025©",
-        style: TextStyle(color: Color(0xFF9CA3AF), fontWeight: FontWeight.w700),
-      ),
-    );
-  }
-}
-
-class StaffGroupItem {
-  final String groupName;
-  const StaffGroupItem({required this.groupName});
 }

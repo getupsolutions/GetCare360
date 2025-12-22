@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:getcare360/core/widget/custom_appbar.dart';
 import 'package:getcare360/features/Ndis/presentation/widget/Staff/vic_widget.dart';
 
-class StaffVictoriaPage extends StatefulWidget {
-  const StaffVictoriaPage({super.key});
+class NdisParticipantACT extends StatefulWidget {
+  const NdisParticipantACT({super.key});
 
   @override
-  State<StaffVictoriaPage> createState() => _StaffVictoriaPageState();
+  State<NdisParticipantACT> createState() => _ParticipantACTState();
 }
 
-class _StaffVictoriaPageState extends State<StaffVictoriaPage> {
+class _ParticipantACTState extends State<NdisParticipantACT> {
   // --- Filters (plug into BLoC later) ---
   final TextEditingController nameCtrl = TextEditingController();
 
@@ -129,7 +129,7 @@ class _StaffVictoriaPageState extends State<StaffVictoriaPage> {
     const pageBg = Color(0xFFF3F4F8);
 
     return Scaffold(
-      appBar: CustomAppBar(title: 'Staff- VIC', centerTitle: true),
+      appBar: CustomAppBar(title: 'Staff- ACT', centerTitle: true),
       backgroundColor: pageBg,
       body: SafeArea(
         child: LayoutBuilder(
@@ -148,7 +148,7 @@ class _StaffVictoriaPageState extends State<StaffVictoriaPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       StaffHeaderCard(
-                        title: "Staff - Victoria",
+                        title: "Staff - ACT",
                         isMobile: isMobile,
                         nameCtrl: nameCtrl,
                         accountStatus: accountStatus,

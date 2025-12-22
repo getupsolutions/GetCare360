@@ -10,14 +10,14 @@ import 'package:getcare360/features/Ndis/presentation/widget/Staff/staff_avail_w
 /// - Each day cell scrolls internally to show all availability items
 /// - No private class names (no "_" anywhere)
 /// ------------------------------------------------------------
-class StaffAvailabilityPage extends StatefulWidget {
-  const StaffAvailabilityPage({super.key});
+class NdisStaffAvailabilityPage extends StatefulWidget {
+  const NdisStaffAvailabilityPage({super.key});
 
   @override
-  State<StaffAvailabilityPage> createState() => StaffAvailabilityPageState();
+  State<NdisStaffAvailabilityPage> createState() => StaffAvailabilityPageState();
 }
 
-class StaffAvailabilityPageState extends State<StaffAvailabilityPage> {
+class StaffAvailabilityPageState extends State<NdisStaffAvailabilityPage> {
   static const Color pageBg = Color(0xFFF3F4F8);
   static const Color purple = Color(0xFF8E24AA);
 

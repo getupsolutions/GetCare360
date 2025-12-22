@@ -2,18 +2,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:getcare360/core/widget/action_btn.dart';
 import 'package:getcare360/core/widget/custom_appbar.dart';
-import 'package:getcare360/features/Agency/presentation/screen/Staff/add_saff_group_page.dart';
 import 'package:getcare360/features/Ndis/presentation/screen/Staff/add_saff_group_page.dart';
 import 'package:getcare360/features/Ndis/presentation/screen/Staff/all_staff_type_page.dart';
 
-class AllStaffGroupPage extends StatefulWidget {
-  const AllStaffGroupPage({super.key});
+class NdisAllStaffGroupPage extends StatefulWidget {
+  const NdisAllStaffGroupPage({super.key});
 
   @override
-  State<AllStaffGroupPage> createState() => AllStaffGroupPageState();
+  State<NdisAllStaffGroupPage> createState() => AllStaffGroupPageState();
 }
 
-class AllStaffGroupPageState extends State<AllStaffGroupPage> {
+class AllStaffGroupPageState extends State<NdisAllStaffGroupPage> {
   static const Color pageBg = Color(0xFFF3F4F8);
 
   final TextEditingController searchCtrl = TextEditingController();
@@ -96,7 +95,7 @@ class AllStaffGroupPageState extends State<AllStaffGroupPage> {
                       onAddNew: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => const AddNewStaffGroupPage(),
+                            builder: (_) => const NdisAddNewStaffGroupPage(),
                           ),
                         );
                       },

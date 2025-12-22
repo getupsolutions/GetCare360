@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:getcare360/core/widget/custom_appbar.dart';
 import 'package:getcare360/features/Ndis/presentation/widget/Staff/vic_widget.dart';
 
-class StaffVictoriaPage extends StatefulWidget {
-  const StaffVictoriaPage({super.key});
+class NdisStaffVictoriaPage extends StatefulWidget {
+  const NdisStaffVictoriaPage({super.key});
 
   @override
-  State<StaffVictoriaPage> createState() => _StaffVictoriaPageState();
+  State<NdisStaffVictoriaPage> createState() => _StaffVictoriaPageState();
 }
 
-class _StaffVictoriaPageState extends State<StaffVictoriaPage> {
+class _StaffVictoriaPageState extends State<NdisStaffVictoriaPage> {
   // --- Filters (plug into BLoC later) ---
   final TextEditingController nameCtrl = TextEditingController();
 

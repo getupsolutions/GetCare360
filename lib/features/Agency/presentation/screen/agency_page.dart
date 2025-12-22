@@ -5,7 +5,7 @@ import 'package:getcare360/features/Agency/presentation/screen/Organization/orga
 import 'package:getcare360/features/Agency/presentation/screen/Organization/organization_timesheet.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Organization/view_all_organization.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Staff/act.dart';
-import 'package:getcare360/features/Agency/presentation/screen/Staff/add_new_stafftype_page.dart';
+import 'package:getcare360/features/Agency/presentation/screen/Staff/add_new_staff.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Staff/add_saff_group_page.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Staff/all_staff_grouppage.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Staff/all_staff_type_page.dart';
@@ -13,6 +13,14 @@ import 'package:getcare360/features/Agency/presentation/screen/Staff/nsw.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Staff/staff_archive.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Staff/staff_availablitity_page.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Staff/vic.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/ndis_add_new_stafftype_page.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/add_saff_group_page.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/all_staff_grouppage.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/all_staff_type_page.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/nsw.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/staff_archive.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/staff_availablitity_page.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/vic.dart';
 import 'package:getcare360/features/Agency/presentation/widget/agency_menu_list.dart';
 import 'package:getcare360/features/Dashboard/presentation/screen/home_page.dart';
 import 'package:getcare360/core/widget/dashboard_card.dart';
@@ -92,7 +100,7 @@ class _AgencyPageState extends State<AgencyPage> {
     }
 
     if (key == "staff_type_add") {
-      NavigatorHelper.push(context, const AddNewStaffTypePage());
+      NavigatorHelper.push(context, const AddNewStaffGroupPage());
       return;
     }
 
@@ -103,6 +111,11 @@ class _AgencyPageState extends State<AgencyPage> {
 
     if (key == "staff_group_add") {
       NavigatorHelper.push(context, const AddNewStaffGroupPage());
+      return;
+    }
+
+    if (key == "staff_add") {
+      NavigatorHelper.push(context, const AgencyAddNewStaffPage());
       return;
     }
 

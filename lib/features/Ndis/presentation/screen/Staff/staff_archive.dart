@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:getcare360/core/widget/custom_appbar.dart';
 import 'package:getcare360/features/Ndis/presentation/widget/Staff/staff_archive_widget.dart';
 
-class StaffArchivePage extends StatefulWidget {
-  const StaffArchivePage({super.key});
+class NdisStaffArchivePage extends StatefulWidget {
+  const NdisStaffArchivePage({super.key});
 
   @override
-  State<StaffArchivePage> createState() => StaffArchivePageState();
+  State<NdisStaffArchivePage> createState() => StaffArchivePageState();
 }
 
-class StaffArchivePageState extends State<StaffArchivePage> {
+class StaffArchivePageState extends State<NdisStaffArchivePage> {
   static const pageBg = Color(0xFFF3F4F8);
   static const purple = Color(0xFF8E24AA);
 

@@ -40,7 +40,7 @@ class _OrganizationTimesheetPageState extends State<OrganizationTimesheetPage> {
       designationAddress: "86 Mann St Gosford 2250",
       organization: "Triniti Home Care PTY LTD",
       staff: "Aleena Monica",
-      status: "Signin",
+      status: "Pending",
     ),
   ];
 
@@ -336,27 +336,34 @@ class TimesheetTable extends StatelessWidget {
   final List<TimesheetRowData> rows;
   const TimesheetTable({super.key, required this.rows});
 
+  // sum of your column widths
+  static const double _colsWidth = 1010.0;
+
   @override
   Widget build(BuildContext context) {
-    // total width of your columns (must match header+row SizedBox widths)
-    const tableWidth = 1010.0; // 260+260+240+160+90 = 1010
+    return LayoutBuilder(
+      builder: (context, c) {
+        final w = c.maxWidth;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: SizedBox(
-          width: tableWidth,
+        // ✅ If screen is narrow, don't use horizontal scroll/table
+        // show mobile optimized cards instead
+        final bool useMobile = w < 1042; // 1010 + 32 padding
+
+        if (useMobile) {
+          return _MobileTimesheetList(rows: rows);
+        }
+
+        // ✅ Desktop table (NO horizontal scroll)
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          clipBehavior: Clip.antiAlias,
           child: Column(
             children: [
-              const _TimesheetTableHeader(),
+              const _TimesheetTableHeader(), // fits now
               const Divider(height: 1),
-
-              // rows scroll vertically inside the fixed-width table
               ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -366,8 +373,8 @@ class TimesheetTable extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -385,15 +392,21 @@ class _TimesheetTableHeader extends StatelessWidget {
 
     return Container(
       height: 44,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
       color: const Color(0xFFF7F7F7),
       child: const Row(
         children: [
-          SizedBox(width: 260, child: Text("Date", style: style)),
+          SizedBox(
+            width: 260,
+            child: Padding(
+              padding: EdgeInsets.only(left: 16),
+              child: Text("Date", style: style),
+            ),
+          ),
           SizedBox(width: 260, child: Text("Designation", style: style)),
           SizedBox(width: 240, child: Text("Organization", style: style)),
           SizedBox(width: 160, child: Text("Staff", style: style)),
           SizedBox(width: 90, child: Text("Status", style: style)),
+          SizedBox(width: 16), // right spacing
         ],
       ),
     );
@@ -407,25 +420,28 @@ class _TimesheetTableRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.symmetric(vertical: 14),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             width: 260,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  row.dateTitle,
-                  style: const TextStyle(fontWeight: FontWeight.w900),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  row.dateSub,
-                  style: const TextStyle(color: Colors.black54),
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    row.dateTitle,
+                    style: const TextStyle(fontWeight: FontWeight.w900),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    row.dateSub,
+                    style: const TextStyle(color: Colors.black54),
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(
@@ -473,6 +489,108 @@ class _TimesheetTableRow extends StatelessWidget {
               child: StatusPill(text: row.status),
             ),
           ),
+          const SizedBox(width: 16), // right spacing
+        ],
+      ),
+    );
+  }
+}
+
+class _MobileTimesheetList extends StatelessWidget {
+  final List<TimesheetRowData> rows;
+  const _MobileTimesheetList({required this.rows});
+
+  @override
+  Widget build(BuildContext context) {
+    if (rows.isEmpty) {
+      return const Center(child: Text("No timesheets found"));
+    }
+
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: rows.length,
+      separatorBuilder: (_, __) => const SizedBox(height: 10),
+      itemBuilder: (context, i) {
+        final r = rows[i];
+        return Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: const Color(0xFFE7E7EF)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                r.dateTitle,
+                style: const TextStyle(fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 4),
+              Text(r.dateSub, style: const TextStyle(color: Colors.black54)),
+              const SizedBox(height: 10),
+
+              Text(
+                r.designationName,
+                style: const TextStyle(fontWeight: FontWeight.w800),
+              ),
+              const SizedBox(height: 6),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.location_on,
+                    size: 14,
+                    color: Colors.deepOrange,
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      r.designationAddress,
+                      style: const TextStyle(color: Colors.black54),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+
+              _kv("Organization", r.organization),
+              _kv("Staff", r.staff),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  const Text(
+                    "Status: ",
+                    style: TextStyle(fontWeight: FontWeight.w800),
+                  ),
+                  StatusPill(text: r.status),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _kv(String k, String v) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 96,
+            child: Text(
+              "$k:",
+              style: const TextStyle(
+                fontWeight: FontWeight.w800,
+                color: Colors.black54,
+              ),
+            ),
+          ),
+          Expanded(child: Text(v)),
         ],
       ),
     );

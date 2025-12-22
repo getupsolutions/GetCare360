@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:getcare360/core/widget/custom_appbar.dart';
 import 'package:getcare360/features/Ndis/presentation/widget/Staff/staff_avail_widget.dart';
@@ -10,14 +9,14 @@ import 'package:getcare360/features/Ndis/presentation/widget/Staff/staff_avail_w
 /// - Each day cell scrolls internally to show all availability items
 /// - No private class names (no "_" anywhere)
 /// ------------------------------------------------------------
-class StaffAvailabilityPage extends StatefulWidget {
-  const StaffAvailabilityPage({super.key});
+class HomecareStaffAvailabilityPage extends StatefulWidget {
+  const HomecareStaffAvailabilityPage({super.key});
 
   @override
-  State<StaffAvailabilityPage> createState() => StaffAvailabilityPageState();
+  State<HomecareStaffAvailabilityPage> createState() => StaffAvailabilityPageState();
 }
 
-class StaffAvailabilityPageState extends State<StaffAvailabilityPage> {
+class StaffAvailabilityPageState extends State<HomecareStaffAvailabilityPage> {
   static const Color pageBg = Color(0xFFF3F4F8);
   static const Color purple = Color(0xFF8E24AA);
 

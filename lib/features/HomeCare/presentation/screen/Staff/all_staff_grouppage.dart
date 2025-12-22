@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:getcare360/core/widget/action_btn.dart';
 import 'package:getcare360/core/widget/custom_appbar.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Staff/add_saff_group_page.dart';
-import 'package:getcare360/features/Ndis/presentation/screen/Staff/add_saff_group_page.dart';
-import 'package:getcare360/features/Ndis/presentation/screen/Staff/all_staff_type_page.dart';
 
-class AllStaffGroupPage extends StatefulWidget {
-  const AllStaffGroupPage({super.key});
+
+class HomecareAllStaffGroupPage extends StatefulWidget {
+  const HomecareAllStaffGroupPage({super.key});
 
   @override
-  State<AllStaffGroupPage> createState() => AllStaffGroupPageState();
+  State<HomecareAllStaffGroupPage> createState() => AllStaffGroupPageState();
 }
 
-class AllStaffGroupPageState extends State<AllStaffGroupPage> {
+class AllStaffGroupPageState extends State<HomecareAllStaffGroupPage> {
   static const Color pageBg = Color(0xFFF3F4F8);
 
   final TextEditingController searchCtrl = TextEditingController();

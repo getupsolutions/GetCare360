@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:getcare360/core/widget/action_btn.dart';
 import 'package:getcare360/core/widget/custom_appbar.dart';
 import 'package:getcare360/features/Agency/presentation/screen/Staff/add_new_stafftype_page.dart';
+import 'package:getcare360/features/Ndis/presentation/screen/Staff/ndis_add_new_stafftype_page.dart' hide FooterBar, StaffTypeItem;
 
 class AllStaffTypePage extends StatefulWidget {
   const AllStaffTypePage({super.key});
