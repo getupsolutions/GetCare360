@@ -13,73 +13,115 @@ final List<NavItem> adminDrawerItems = const [
         title: "All Participants",
         routeKey: "org_all",
         children: [
-          NavItem(title: "New South Wales", routeKey: "new_south"),
-          NavItem(title: "Victoria", routeKey: "vic"),
-          NavItem(title: "Add New Participants", routeKey: "add_new_part"),
-          NavItem(title: "Archive", routeKey: "arch"),
+          NavItem(title: "New South Wales", routeKey: "new_south_admin"),
+          NavItem(title: "Victoria", routeKey: "vic_admin"),
+          NavItem(
+            title: "Add New Participants",
+            routeKey: "add_new_part_admin",
+          ),
+          NavItem(title: "Archive", routeKey: "arch_admin"),
         ],
       ),
-      NavItem(title: "Roster", routeKey: "roster"),
-      NavItem(title: "Timesheet", routeKey: "timesheet"),
-      NavItem(title: "Create Care Plan", routeKey: "create_care"),
-      NavItem(title: "Create Chart", routeKey: "create_char"),
-      NavItem(title: "Support items", routeKey: "sup_item"),
+      NavItem(title: "Roster", routeKey: "part_roster_admin"),
+      NavItem(title: "Timesheet", routeKey: "timesheet_admin"),
+      NavItem(
+        title: "Create Care Plan",
+        routeKey: "create_careAdmin",
+        children: [
+          NavItem(title: "All Care Plans", routeKey: "all_careplans_Admin"),
+          NavItem(
+            title: "Add New Care Plan",
+            routeKey: "add_new_care_plan_Admin",
+          ),
+          NavItem(title: "Archived", routeKey: "Admin_Careplan_archived"),
+        ],
+      ),
+      NavItem(
+        title: "Create Chart",
+        routeKey: "create_ChartAdmin",
+        children: [
+          NavItem(title: "All Chart", routeKey: "all_chartAdmin"),
+          NavItem(title: "Add New Chart", routeKey: "add_new_chart_Admin"),
+          NavItem(title: "Archived", routeKey: "Admin_Chart_archived"),
+        ],
+      ),
+      NavItem(
+        title: "Support items",
+        routeKey: "support_items_Admin",
+        children: [
+          NavItem(title: "All Supprort", routeKey: "all_support_Admin"),
+          NavItem(
+            title: "Add New Support",
+            routeKey: "add_new_support_Admin",
+          ),
+          NavItem(title: "Archived", routeKey: "Admin_support_archived"),
+        ],
+      ),
     ],
   ),
 
   NavItem(
     title: "Organization",
-    routeKey: "org",
+    routeKey: "org_admin",
     icon: Icons.apartment,
     children: [
       NavItem(
         title: "All Organization",
-        routeKey: "org_all",
+        routeKey: "org_all_admin",
         children: [
-          NavItem(title: "View All Organization", routeKey: "org_view_all"),
-          NavItem(title: "Add New Organization", routeKey: "org_add"),
-          NavItem(title: "Archive", routeKey: "org_archive"),
+          NavItem(
+            title: "View All Organization",
+            routeKey: "org_view_all_admin",
+          ),
+          NavItem(title: "Add New Organization", routeKey: "org_add_admin"),
+          NavItem(title: "Archive", routeKey: "org_archive_admin"),
         ],
       ),
-      NavItem(title: "Roster", routeKey: "roster"),
-      NavItem(title: "Timesheet", routeKey: "timesheet"),
-      NavItem(title: "Message for all staff", routeKey: "message_all"),
+      NavItem(title: "Roster", routeKey: "Org_roster_admin"),
+      NavItem(title: "Timesheet", routeKey: "org_timesheet_admin"),
+      NavItem(title: "Message for all staff", routeKey: "message_all_admin"),
     ],
   ),
 
   NavItem(
     title: "Staff",
-    routeKey: "staff",
+    routeKey: "staff_admin",
     icon: Icons.people,
     children: [
       NavItem(
         title: "All Staffs",
-        routeKey: "staff_all",
+        routeKey: "staff_all_admin",
         children: [
-          NavItem(title: "VIC", routeKey: "staff_vic"),
-          NavItem(title: "NSW", routeKey: "staff_nsw"),
-          NavItem(title: "ACT", routeKey: "staff_act"),
+          NavItem(title: "VIC", routeKey: "staff_vic_admin"),
+          NavItem(title: "NSW", routeKey: "staff_nsw_admin"),
+          NavItem(title: "ACT", routeKey: "staff_act_admin"),
         ],
       ),
-      NavItem(title: "Add New Staff", routeKey: "staff_add"),
-      NavItem(title: "Archive", routeKey: "staff_archive"),
-      NavItem(title: "Availability", routeKey: "staff_availability"),
+      NavItem(title: "Add New Staff", routeKey: "staff_add_admin"),
+      NavItem(title: "Archive", routeKey: "staff_archive_admin"),
+      NavItem(title: "Availability", routeKey: "staff_availability_admin"),
 
       NavItem(
         title: "Staff Type Settings",
-        routeKey: "staff_type_settings",
+        routeKey: "staff_type_settings_admin",
         children: [
-          NavItem(title: "All Staff Type", routeKey: "staff_type_all"),
-          NavItem(title: "Add New Staff Type", routeKey: "staff_type_add"),
+          NavItem(title: "All Staff Type", routeKey: "staff_type_all_admin"),
+          NavItem(
+            title: "Add New Staff Type",
+            routeKey: "staff_type_add_admin",
+          ),
         ],
       ),
 
       NavItem(
         title: "Staff Group Settings",
-        routeKey: "staff_group_settings",
+        routeKey: "staff_group_settings_admin",
         children: [
-          NavItem(title: "All Staff Group", routeKey: "staff_group_all"),
-          NavItem(title: "Add New Staff Group", routeKey: "staff_group_add"),
+          NavItem(title: "All Staff Group", routeKey: "staff_group_all_admin"),
+          NavItem(
+            title: "Add New Staff Group",
+            routeKey: "staff_group_add_admin",
+          ),
         ],
       ),
     ],
@@ -92,8 +134,8 @@ final List<NavItem> adminDrawerItems = const [
     routeKey: "admin_poli",
     icon: Icons.policy,
     children: [
-      NavItem(title: "All Items", routeKey: "admin_allitem"),
-      NavItem(title: "Add New Item", routeKey: "admin_add_item"),
+      NavItem(title: "All Items", routeKey: "admin_allitem_procedurepoli"),
+      NavItem(title: "Add New Item", routeKey: "admin_add_item_procedurepoli"),
     ],
   ),
   NavItem(
