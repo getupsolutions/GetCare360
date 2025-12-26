@@ -1,9 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:getcare360/features/Dashboard/presentation/screen/home_page.dart';
+import 'package:getcare360/features/Admin/Dashboard/presentation/screen/home_page.dart';
 import 'package:getcare360/core/widget/navigator_helper.dart';
 import 'package:getcare360/core/widget/text_field_box.dart';
 import 'package:getcare360/features/Login/presentation/widget/logo_widget.dart';
+import 'package:getcare360/features/User/Dashboard/Presentation/screens/dashboard_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -114,7 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 44,
                             child: ElevatedButton(
                               onPressed: () {
-                                NavigatorHelper.push(context, const HomePage());
+                                NavigatorHelper.push(
+                                  context,
+                                  const DashboardPage(),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF8E24AA),

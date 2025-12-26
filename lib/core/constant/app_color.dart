@@ -28,4 +28,26 @@ class AppColors {
   static const danger = Color(0xFFEF4444);
   static const infoChipBg = Color(0xFFBDEFF2);
   static const infoChipText = Color(0xFF0F766E);
+
+  static const Color brandPurple = Color(0xFF6D28D9);
+  static const Color sideBg = Color(0xFF2B0A59);
+  static const Color sideBg2 = Color(0xFF210647);
+  static const Color accentGreen = Color(0xFF10B981);
+
+  static ThemeData get light {
+    final base = ThemeData.light(useMaterial3: true);
+    return base.copyWith(
+      scaffoldBackgroundColor: const Color(0xFFF5F6FA),
+      colorScheme: base.colorScheme.copyWith(
+        primary: brandPurple,
+        secondary: accentGreen,
+      ),
+      cardTheme: const CardThemeData(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
+      ),
+    );
+  }
 }
